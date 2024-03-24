@@ -20,5 +20,18 @@ internal class Program
         var batteries = new Item("Batteries", 10);
         var umbrella = new Item("Umbrella", 5);
         var sunscreen = new Item("Sunscreen", 8);
+
+
+        Store store = new Store("Mandrin");
+        store.AddItem(waterBottle);
+        store.AddItem(chocolateBar);
+        store.AddItem(notebook);
+        List<Item> items = store.GetItems();
+        items.ForEach((item) =>
+        {
+            Console.WriteLine($"Name = {item.GetName()} Quantity = {item.GetQuantity()} Date = {item.GetDate()}");
+        });
+
+        
     }
 }
