@@ -9,11 +9,11 @@ namespace sda_onsite_2_inventory_management.src
     {
         private readonly string name;
         private int quantity;
-        private string date;
+        private DateTime date;
 
 
 
-        public Item(string name, int quantity, string? date = null)
+        public Item(string name, int quantity, DateTime? date = null)
         {
             this.name = name;
             if (quantity < 0)
@@ -24,22 +24,22 @@ namespace sda_onsite_2_inventory_management.src
 
             if (date == null)
             {
-                this.date = Convert.ToString(DateTime.Now);
+                this.date = DateTime.Now;
             }
             else
             {
-                this.date = date;
+                this.date = (DateTime)date;
             }
         }
         public string GetName()
         {
             return name;
         }
-        public string GetDate()
+        public DateTime GetDate()
         {
             return date;
         }
-        public void SetDate(string value)
+        public void SetDate(DateTime value)
         {
             date = value;
         }
