@@ -5,9 +5,9 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var waterBottle = new Item("Water Bottle", 10, new DateTime(2023, 1, 1));
-        var chocolateBar = new Item("Chocolate Bar", 15, new DateTime(2023, 2, 1));
-        var notebook = new Item("Notebook", 5, new DateTime(2023, 3, 1));
+        var waterBottle = new Item("Water Bottle", 10, new DateTime(2024, 5, 1));
+        var chocolateBar = new Item("Chocolate Bar", 15, new DateTime(2024, 2, 1));
+        var notebook = new Item("Notebook", 5, new DateTime(2024, 3, 1));
         var pen = new Item("Pen", 20, new DateTime(2023, 4, 1));
         var tissuePack = new Item("Tissue Pack", 30, new DateTime(2023, 5, 1));
         var chipsBag = new Item("Chips Bag", 10, new DateTime(2023, 6, 1));
@@ -23,24 +23,22 @@ internal class Program
 
 
         Store store = new Store("Mandrin", 90);
-        store.AddItem(waterBottle);
-        store.AddItem(chocolateBar);
-        store.AddItem(notebook);
-        store.AddItem(pen);
-        store.AddItem(tissuePack);
         store.AddItem(chipsBag);
-
-        List<Item> items = store.GetItems();
-        items.ForEach((item) =>
+        store.AddItem(notebook);
+        store.AddItem(chocolateBar);
+        store.AddItem(waterBottle);
+        store.AddItem(tissuePack);
+        store.AddItem(pen);
+        
+        var groupByDate = store.GroupByDate();
+        foreach (var group in groupByDate)
         {
-            Console.WriteLine($"Name = {item.GetName()} Quantity = {item.GetQuantity()} Date = {item.GetDate()}");
-        });
-
-        store.SortByNameAsc();
-        Console.WriteLine(store.GetCurrentVolume());
-        Console.WriteLine(store.maximumCapacity);
-
-
+            Console.WriteLine($"{group.Key} Items:");
+            foreach (var item in group.Value)
+            {
+                Console.WriteLine($" - {item.GetName()}, Created: {item.GetDate().ToShortDateString()}");
+            }
+        }
 
 
     }

@@ -75,14 +75,62 @@ namespace sda_onsite_2_inventory_management.src
             }
         }
 
-        public void SortByNameAsc()
+        public List<Item> SortByNameAsc()
         {
-            var sortbyName = items.OrderBy(item => item.GetName());
-            foreach (var items in sortbyName)
+            var sortbyName = items.OrderBy(item => item.GetName()).ToList();
+            return sortbyName;
+        }
+
+
+        public List<Item> SortByDate(string SortOrder)
+        {
+            if (SortOrder.ToUpper() == "ASC")
             {
-                Console.WriteLine($"Order By Asc Name {items.GetName()}");
+                var SortByDate = items.OrderBy(item => item.GetDate()).ToList();
+                Console.WriteLine("Sorting date by Ascending");
+                return SortByDate;
             }
+
+            if (SortOrder.ToUpper() == "DESC")
+            {
+                var SortByDate = items.OrderByDescending(item => item.GetDate()).ToList();
+                Console.WriteLine("Sorting date by Descending");
+                return SortByDate;
+            }
+            else
+            {
+                Console.WriteLine("Wrong input Please type 'ASC' or 'DESC' to sorting this list with no sorting!!! ");
+                return items;
+            }
+
+        }
+
+        public Dictionary<string, List<Item>> GroupByDate()
+        {
+            Dictionary<string, List<Item>> grouped = new();
+            DateTime currentDate = DateTime.Now;
+            foreach (var item in items)
+            {
+                if ((currentDate - item.GetDate()).TotalDays <= 90)
+                {
+                    if (!grouped.ContainsKey("new"))
+                    {
+                        grouped.Add("new", []);
+
+                    }
+                    grouped["new"].Add(item);
+                }
+                else
+                {
+                    if (!grouped.ContainsKey("old"))
+                    {
+                        grouped.Add("old", []);
+
+                    }
+                    grouped["old"].Add(item);
+                }
+            }
+            return (grouped);
         }
     }
-
 }
