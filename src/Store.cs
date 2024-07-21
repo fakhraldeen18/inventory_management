@@ -82,16 +82,16 @@ namespace sda_onsite_2_inventory_management.src
         }
 
 
-        public List<Item> SortByDate(string SortOrder)
+        public List<Item> SortByDate(SortOrder Order)
         {
-            if (SortOrder.ToUpper() == "ASC")
+            if (Order == SortOrder.ASC)
             {
                 var SortByDate = items.OrderBy(item => item.GetDate()).ToList();
                 Console.WriteLine("Sorting date by Ascending");
                 return SortByDate;
             }
 
-            if (SortOrder.ToUpper() == "DESC")
+            if (Order == SortOrder.DESC)
             {
                 var SortByDate = items.OrderByDescending(item => item.GetDate()).ToList();
                 Console.WriteLine("Sorting date by Descending");
@@ -130,7 +130,7 @@ namespace sda_onsite_2_inventory_management.src
                     grouped["old"].Add(item);
                 }
             }
-            return (grouped);
+            return grouped;
         }
     }
 }

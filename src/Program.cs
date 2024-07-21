@@ -29,7 +29,8 @@ internal class Program
         store.AddItem(waterBottle);
         store.AddItem(tissuePack);
         store.AddItem(pen);
-        
+
+
         var groupByDate = store.GroupByDate();
         foreach (var group in groupByDate)
         {
@@ -39,7 +40,11 @@ internal class Program
                 Console.WriteLine($" - {item.GetName()}, Created: {item.GetDate().ToShortDateString()}");
             }
         }
-
+        var Sort = store.SortByDate(SortOrder.DESC);
+        foreach (var item in Sort)
+        {
+            Console.WriteLine($"Date {item.GetDate()}");
+        }
 
     }
 }
